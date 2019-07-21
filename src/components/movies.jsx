@@ -18,19 +18,20 @@ class Movies extends Component {
 
   componentDidMount() {
     const genres = [{ _id: "", name: "All Genres" }, ...getGenres()];
+
     this.setState({ movies: getMovies(), genres });
   }
 
   handleDelete = movie => {
     const movies = this.state.movies.filter(m => m._id !== movie._id);
-    this.setState({ movies: movies });
+    this.setState({ movies });
   };
 
   handleLike = movie => {
     const movies = [...this.state.movies];
     const index = movies.indexOf(movie);
     movies[index] = { ...movies[index] };
-    movies[index].liked = !movies[index.liked];
+    movies[index].liked = !movies[index].liked;
     this.setState({ movies });
   };
 
@@ -46,7 +47,7 @@ class Movies extends Component {
     this.setState({ sortColumn });
   };
 
-  getPageData = () => {
+  getPagedData = () => {
     const {
       pageSize,
       currentPage,
@@ -71,9 +72,9 @@ class Movies extends Component {
     const { length: count } = this.state.movies;
     const { pageSize, currentPage, sortColumn } = this.state;
 
-    if (count === 0) return <p>There are no movies in the database</p>;
+    if (count === 0) return <p>There are no movies in the database.</p>;
 
-    const { totalCount, data: movies } = this.getPageData();
+    const { totalCount, data: movies } = this.getPagedData();
 
     return (
       <div className="row">
@@ -85,10 +86,10 @@ class Movies extends Component {
           />
         </div>
         <div className="col">
-          <p>Showing {totalCount} movies in the database</p>
+          <p>Showing {totalCount} movies in the database.</p>
           <MoviesTable
-            sortColumn={sortColumn}
             movies={movies}
+            sortColumn={sortColumn}
             onLike={this.handleLike}
             onDelete={this.handleDelete}
             onSort={this.handleSort}
