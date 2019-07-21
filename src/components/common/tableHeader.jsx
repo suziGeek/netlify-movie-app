@@ -1,10 +1,10 @@
 import React, { Component } from "react";
-
-// columns: array
-// sortColumn: object
-// onSort: function
+// import { DESTRUCTION } from "dns";
 
 class TableHeader extends Component {
+  //columns: array
+  //sortColumn: object
+  //onSort: function
   raiseSort = path => {
     const sortColumn = { ...this.props.sortColumn };
     if (sortColumn.path === path)
